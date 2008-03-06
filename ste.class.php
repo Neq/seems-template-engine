@@ -145,6 +145,9 @@ class SeemsTemplateCache {
 	 */
 	protected function addCacheFile($temp_file, $temp_file_content) {
 	
+		if(!file_exists($this->cache_dir))
+		  mkdir($this->cache_dir);
+	
 		$fp = fopen($this->cache_dir . $temp_file . ".ste","w");
 		fwrite($fp,$temp_file_content);
 		fclose($fp);
