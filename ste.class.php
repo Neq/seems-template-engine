@@ -80,7 +80,10 @@ class SeemsTemplate extends SeemsTemplateCache {
  * SeemsTemplateCache
  * This Class is for handling the Cache-Function.
  * 
- * @todo: Add posibility to turn the cache-function off 
+ * @todo:
+ *  - Add posibility to turn the cache-function off 
+ *  - Add possibility to cache single fragments you can define in the code
+ * 
  */
 class SeemsTemplateCache {
 	
