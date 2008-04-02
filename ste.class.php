@@ -181,6 +181,40 @@ class SeemsTemplateCache {
 		
 	}
 	
+	/**
+	 * deleteCacheFile() deletes the given cache file from the Cache.
+	 * It have to be executed again to rebuild the Cache.
+	 * 
+	 * @return 
+	 * @param $cache_file String
+	 */
+	protected function deleteCacheFile($cache_file) {
+	
+		if(file_exists($this->template_dir . $cache_file))
+	      unlink($this->template_dir . $cache_file);
+		  if(file_exists($this->template_dir . $cache_file))
+		    throw new Exception($cache_file . " couldn't be deleted. Maybe you don't have enough rights for this action.");
+		else
+  		  throw new Exception("You can't delete the Cache-File " . $cache_file . ", because it doesn't exist anymore.");		
+		
+	}
+	
+	/**
+	 * clearCache() is deleting all files from the defined cache directory. 
+	 * @return 	 
+	 */
+	protected function clearCache() {
+	
+		$del_dir = dir($this->cache_dir);
+		
+	    while(false !== ($file = $del_dir->read())) {
+    	    unlink($file);
+	    }
+    	
+		$dir->close();
+		
+	}
+	
 }
 
 ?>
