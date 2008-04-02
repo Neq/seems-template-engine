@@ -6,12 +6,18 @@
  * Easy to use Template Engine for PHP5 (because of easy Function-Overloading).
  * Just use the basic idea of PHP, to be a Template-Language by itself.
  *  
- * @author: Patrick Freitag
+ * @author: Patrick Freitag - http://www.produc.de
+ * @download: http://www.produc.de/downloads/seems_template.zip
  * @id: $id$   
  */
 
 class SeemsTemplate extends SeemsTemplateCache {
 
+  /**
+   * Is checking if the Configuration of the .ini-Parameter "short_open_tag" is turned on.
+   * Otherwise, the short form to embedding PHP into HTML is not possible.
+   * @return exception
+   */
   public function __construct() {
   	
 	if(ini_get("short_open_tag") == 0) {
@@ -81,7 +87,7 @@ class SeemsTemplate extends SeemsTemplateCache {
  * This Class is for handling the Cache-Function.
  * 
  * @todo:
- *  - Add posibility to turn the cache-function off 
+ *  - Add possibility to turn the cache-function off 
  *  - Add possibility to cache single fragments you can define in the code
  * 
  */
@@ -150,6 +156,12 @@ class SeemsTemplateCache {
 	
 		if(!file_exists($this->cache_dir))
 		  mkdir($this->cache_dir);
+		  
+		$temp_file_split = explode("/", $temp_file);
+		$temp_file_count = count($temp_file_split);
+				
+		if($temp_file_count > 0)
+		  $temp_file = $temp_file_split[$temp_file_count - 1];
 	
 		$fp = fopen($this->cache_dir . $temp_file . ".ste","w");
 		fwrite($fp,$temp_file_content);
@@ -170,11 +182,5 @@ class SeemsTemplateCache {
 	}
 	
 }
-
-$view = new SeemsTemplate;
-$view->name = "Test";
-$view->customer_name = "Hihi";
-$view->rows = array("segen", "patrick", "fritz", "seppi", "wurst", "käse");
-$view->display("test.php");
 
 ?>
